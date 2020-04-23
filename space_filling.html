@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Node-Link Diagram</title>
+  <title>Space Filling Diagram</title>
 
   <!-- Load Bulma from CDN (consider saving it to repository instead) -->
   <!-- https://bulma.io/ -->
@@ -20,7 +20,7 @@
   <script src="https://d3js.org/d3-array.v2.min.js"></script>
 
   <!-- include viz script(s) -->
-  <script src="assets/js/node_link.js"></script>
+  <script src="assets/js/space_filling.js"></script>
 
 </head>
 
@@ -109,75 +109,81 @@
     <div class="content">
       <!-- Page title -->
       <figure>
-        <svg width="960" height="500" id="node-link"></svg>
+        <svg width="960" height="700" id="space-filling"></svg>
         <script type="text/javascript">
-          d3.csv('assets/data/filtered_fire_calls.csv', d3.autoType).then(node_link);
+          d3.csv('assets/data/filtered_fire_calls.csv', d3.autoType).then(space_filling);
         </script>
         <figcaption>
-          Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6/data">SF 311 Homeless Encampments: February 2020</a> (<a
-            href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h">Neighborhoods</a>, <a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Streets-Active-and-Retired/3psu-pn9h">Streets</a>)
+          Sunburst Space Filling Diagram. Data Source: <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3/data">SF Fire Calls for Service</a>
         </figcaption>
       </figure>
+      <p>On March 16th, San Francisco's Mayor London Breed issued a Public Health Order requiring that residence remain in place (commonly refered to as a "stay-at-home" or "lockdown" order),
+        with the only exception being for essential workers. The stay-at-home order became effective at midnight on Tuesday, March 17th (i.e. Wednesday). I created two labels, "Pre-Lockdown"
+        and "Lockdown" and assigned one of these labels to each record. Pre-Lockdown records are service calls that occured between March 10th and March 17th in 2020. Lockdown records are service
+        calls that occured between March 18th and March 25th in 2020. Both label periods contain eight days worth of call response data.
+      </p>
+      <h3 id="encoding">Encoding</h3>
+      <p>This sunburst space filling chart shows the cumulative values of subtrees. Each subtree level is represented by an arc cell. The root node is represented by city, which is San Francisco.
+        The second level (or subtree) represents whether the records occured prior to the lockdown or during the lockdown. Each cell is color encoded based on the period it occured. For example, a response that occured after March 17th, the official
+        lockdown order date, is assigned the color purple (see legend).
+      </p>
+      <h3 id="wrangling">Wrangling</h3>
+      <p>Aside from the data wrangling described <a href="index.html#data">here</a>, no additional processing was used.</p>
+      <h3 id="conclusion">Conclusion</h3>
+      <p>
+        From this sunburst space filling diagram, we can see that the SF Fire Department recieved more response calls in the 8 days following the lockdown. In particular, we can see that the number of potentially life-threatening medical incidents
+        increased significantly!
+        Rather than share my opinion of what this may mean, at the risk of spreading inaccurace information, I will leave it to the medical experts to
+        decipher what this increase may mean.
+      </p>
+      <!-- </section> -->
 
-     <h3 id="encoding">Encoding</h3>
-     <p>Each hierarchical level shows a pacticular column from the data and is encoded by a color (see legend). The root node is represented by city, which is San Francisco.
-       The second level represents whether the records occured prior to the lockdown or during the lockdown.
-     </p>
-     <h3 id="wrangling">Wrangling</h3>
-     <p>Aside from the data wrangling described <a href="index.html#data">here</a>, no additional processing was used.</p>
-     <h3 id="conclusion">Conclusion</h3>
-     <p>
-       From this node-link circular dendogram, we can see that the SF Fire Department recieved more response calls in the 8 days following the lockdown. In particular, we can see that the number of potentially life-threatening medical incidents increased significantly.
-     </p>
-    <!-- </section> -->
+      <!-- Page footer -->
+      <!-- https://bulma.io/documentation/layout/footer/ -->
+      <footer class="footer">
+        <div class="content has-text-centered is-size-7">
+          <p>
+            <a href="#top">
+              <span class="fas fa-arrow-up"></span>
+              <span class="has-text-weight-medium">Back to Top</span>
+            </a>
+          </p>
 
-    <!-- Page footer -->
-    <!-- https://bulma.io/documentation/layout/footer/ -->
-    <footer class="footer">
-      <div class="content has-text-centered is-size-7">
-        <p>
-          <a href="#top">
-            <span class="fas fa-arrow-up"></span>
-            <span class="has-text-weight-medium">Back to Top</span>
-          </a>
-        </p>
+          <p>
+            <a href="https://github.com/usf-cs360-spring2020/homework4-krmiddlebrook" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+              <i class="fab fa-github-alt"></i>&nbsp;<strong>Github</strong>
+            </a>
 
-        <p>
-          <!-- TODO: Change to link to your Github repository -->
-          <a href="https://github.com/usf-cs360-spring2020/homework4-krmiddlebrook" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
-            <i class="fab fa-github-alt"></i>&nbsp;<strong>Github</strong>
-          </a>
+            <a href="https://fontawesome.com/" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+              <i class="fab fa-font-awesome"></i>&nbsp;<strong>FontAwesome</strong>
+            </a>
 
-          <a href="https://fontawesome.com/" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
-            <i class="fab fa-font-awesome"></i>&nbsp;<strong>FontAwesome</strong>
-          </a>
+            <a href="https://bulma.io" class="button is-small">
+              <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="128" height="24">
+            </a>
+          </p>
+        </div>
+      </footer>
+      <!-- End page footer -->
 
-          <a href="https://bulma.io" class="button is-small">
-            <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="128" height="24">
-          </a>
-        </p>
-      </div>
-    </footer>
-    <!-- End page footer -->
+      <!-- Mobile menu responsiveness -->
+      <!-- https://bulma.io/documentation/components/navbar/ -->
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-    <!-- Mobile menu responsiveness -->
-    <!-- https://bulma.io/documentation/components/navbar/ -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-        if ($navbarBurgers.length > 0) {
-          $navbarBurgers.forEach(el => {
-            el.addEventListener('click', () => {
-              const target = el.dataset.target;
-              const $target = document.getElementById(target);
-              el.classList.toggle('is-active');
-              $target.classList.toggle('is-active');
+          if ($navbarBurgers.length > 0) {
+            $navbarBurgers.forEach(el => {
+              el.addEventListener('click', () => {
+                const target = el.dataset.target;
+                const $target = document.getElementById(target);
+                el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+              });
             });
-          });
-        }
-      });
-    </script>
-    <!-- End mobile menu responsiveness -->
+          }
+        });
+      </script>
+      <!-- End mobile menu responsiveness -->
 
 </body>
