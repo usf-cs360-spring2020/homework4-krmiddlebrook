@@ -1,0 +1,9 @@
+theme: jekyll-theme-dinky
+
+# Added information below.
+title: "Kai Middlebrook"
+description: "Github Pages website for CS 360/560 Data Visualization."
+
+# Enables using emoji. See: https://help.github.com/en/articles/emoji-on-github-pages
+plugins:
+  - jemoji

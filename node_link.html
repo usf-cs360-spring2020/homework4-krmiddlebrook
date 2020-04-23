@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Node-Link Diagram</title>
+
+  <!-- Load Bulma from CDN (consider saving it to repository instead) -->
+  <!-- https://bulma.io/ -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <!-- Custom CSS definitions -->
+  <link href="assets/css/my_styles.css" rel="stylesheet" type="text/css">
+
+  <!-- Load Font Awesome 5 (free) icons -->
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+  <!-- include d3.js v5 -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3-array.v2.min.js"></script>
+
+  <!-- include viz script(s) -->
+  <script src="assets/js/node_link.js"></script>
+
+</head>
+
+<body>
+  <!--
+  hard-code the svg and various g layers so that even if the streets are loaded
+  and drawn last, they will still show up behind the symbols
+-->
+  <!-- Page header -->
+  <!-- https://bulma.io/documentation/layout/hero/ -->
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">Kai Middlebrook</h1>
+        <h2 class="subtitle">CS 360 Data Visualizations</h2>
+      </div>
+    </div>
+  </section>
+  <!-- End page header -->
+
+  <!-- Page navigation -->
+  <!-- https://bulma.io/documentation/components/navbar/ -->
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <!-- TODO: Change which navbar-item is-active if needed -->
+        <a class="navbar-item is-active" href="index.html">
+          <span class="icon"><i class="fas fa-home"></i></span>
+          <span>Home</span>
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-menu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="main-menu" class="navbar-menu has-text-weight-medium">
+        <!-- Left navbar items -->
+        <div class="navbar-start">
+          <a class="navbar-item" href="#data" title="Data">
+            <span class="icon"><i class="fas fa-table"></i></span>
+            <span>Data</span>
+          </a>
+          <!-- Begin Homework Dropdown -->
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              Visualizations
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="node_link.html" title="SF Fire Calls for Service Node-Link Diagram">
+                <span class="icon"><i class="fa fa-chart-area"></i></span>
+                <span>SF Fire Calls for Service Node-Link Diagram</span>
+              </a>
+              <a class="navbar-item" href="space_filling.html" title="SF Fire Calls for Service Space Filling Diagram">
+                <span class="icon"><i class="fa fa-chart-area"></i></span>
+                <span>SF Fire Calls for Service Space Filling Diagram</span>
+              </a>
+            </div>
+          </div>
+          <!-- End Homework Dropdown -->
+        </div>
+
+        <!-- Right navbar items -->
+        <div class="navbar-end">
+          <!-- TODO: Update as needed -->
+          <a class="navbar-item" href="#grade" title="Grade">
+            <span class="icon"><i class="fas fa-tasks"></i></span>
+            <span>Grade</span>
+          </a>
+
+          <a class="navbar-item" href="#about" title="About">
+            <span class="icon"><i class="fas fa-info-circle"></i></span>
+            <span>About</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- End page navigation -->
+
+  <!-- <section class="section"> -->
+  <div class="container">
+    <!-- Begin page content -->
+    <div class="content">
+      <!-- Page title -->
+      <figure>
+        <svg width="960" height="500" id="node-link"></svg>
+        <script type="text/javascript">
+          d3.csv('assets/data/filtered_fire_calls.csv', d3.autoType).then(node_link);
+        </script>
+        <figcaption>
+          Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6/data">SF 311 Homeless Encampments: February 2020</a> (<a
+            href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h">Neighborhoods</a>, <a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Streets-Active-and-Retired/3psu-pn9h">Streets</a>)
+        </figcaption>
+      </figure>
+
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <!-- custom charting scripts -->
+      <!-- <script src="tools.js"></script> -->
+      <!-- <script src='map.js'></script> -->
+
+    </div>
+
+    <div class='content'>
+      <ul>
+        <li><strong>Encoding: </strong>The map encodes neighborhood 311 call counts about homeless encampments. Larger circles indicate that the neighborhood had more encampment calls in February 2020.</li>
+        <li><strong>Interactivity: </strong>Users can use their mouse to hover over the map and see neighborhood outlines. In addition, hovering over a cirlce will display the neighborhood and encampment call count for February 2020.</li>
+        <li><strong>Wrangling: </strong>Data wrangling for this data is describe in the <a href="index.html#data">data</a> section of the home page </li>
+        <li><strong>Conclusion: </strong>From the map we can conclude that homeless encampments are often located near downtown or the Mission rather than towards Ocean Beach.</li>
+
+      </ul>
+    </div>
+    <!-- </section> -->
+</body>

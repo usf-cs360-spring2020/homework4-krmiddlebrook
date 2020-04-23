@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- TODO: Change title -->
-    <title>Website Template</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Load Bulma from CDN (consider saving it to repository instead) -->
-    <!-- https://bulma.io/ -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <title>Kai's Homework 3</title>
 
-    <!-- Load Font Awesome 5 (free) icons -->
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  </head>
+  <!-- Load Bulma from CDN (consider saving it to repository instead) -->
+  <!-- https://bulma.io/ -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
 
-  <body>
+
+  <!-- Load Font Awesome 5 (free) icons -->
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+  <!-- include d3.js v5 -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3-array.v2.min.js"></script>
+</head>
+
+<body>
 
   <!-- Page header -->
   <!-- https://bulma.io/documentation/layout/hero/ -->
   <section class="hero is-primary is-bold">
     <div class="hero-body">
       <div class="container">
-        <!-- TODO: Change title -->
-        <h1 class="title">Website Title</h1>
-        <!-- TODO: Change subtitle -->
-        <h2 class="subtitle">Website Subtitle</h2>
+        <h1 class="title">Kai Middlebrook</h1>
+        <h2 class="subtitle">CS 360 Data Visualizations</h2>
       </div>
     </div>
   </section>
@@ -36,7 +39,6 @@
   <nav class="navbar is-light" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <!-- TODO: Change link to repository homepage if needed -->
         <!-- TODO: Change which navbar-item is-active if needed -->
         <a class="navbar-item is-active" href="index.html">
           <span class="icon"><i class="fas fa-home"></i></span>
@@ -57,41 +59,29 @@
             <span class="icon"><i class="fas fa-table"></i></span>
             <span>Data</span>
           </a>
-
-          <!-- TODO: Modify or remove dropdown -->
+          <!-- Begin Homework Dropdown -->
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
               Visualizations
             </a>
-
             <div class="navbar-dropdown">
-              <a class="navbar-item">
-                <span class="icon"><i class="fas fa-chart-line"></i></span>
-                <span>Line Chart</span>
+              <a class="navbar-item" href="node_link.html" title="SF Fire Calls for Service Node-Link Diagram">
+                <span class="icon"><i class="fa fa-chart-area"></i></span>
+                <span>SF Fire Calls for Service Node-Link Diagram</span>
               </a>
-              <a class="navbar-item">
-                <span class="icon"><i class="fas fa-chart-area"></i></span>
-                <span>Area Chart</span>
-              </a>
-
-              <hr class="navbar-divider">
-
-              <a class="navbar-item">
-                <span class="icon"><i class="fas fa-chart-bar"></i></span>
-                <span>Bar Chart</span>
-              </a>
-              <a class="navbar-item">
-                <span class="icon"><i class="fas fa-chart-pie"></i></span>
-                <span>Pie Chart</span>
+              <a class="navbar-item" href="space_filling.html" title="SF Fire Calls for Service Space Filling Diagram">
+                <span class="icon"><i class="fa fa-chart-area"></i></span>
+                <span>SF Fire Calls for Service Space Filling Diagram</span>
               </a>
             </div>
           </div>
+          <!-- End Homework Dropdown -->
         </div>
 
         <!-- Right navbar items -->
         <div class="navbar-end">
           <!-- TODO: Update as needed -->
-          <a class="navbar-item" href="#about" title="About">
+          <a class="navbar-item" href="#grade" title="Grade">
             <span class="icon"><i class="fas fa-tasks"></i></span>
             <span>Grade</span>
           </a>
@@ -110,132 +100,60 @@
     <div class="container">
       <!-- Begin page content -->
       <div class="content">
-        <h1 class="title">
-          <!-- TODO: Change page title -->
-          Page Title
-        </h1>
-        <p class="subtitle">
-          <!-- TODO: Change page subtitle -->
-          Page Subtitle
+        <!-- Page title -->
+        <h1 class="title">Homework 4</h1>
+        <h2 class="subtitle">Visualizing the impact of the stay-at-home order on San Francisco's Fire Department</h2>
+
+        <p>
+          The goal of this assignment is to visualize how the stay-at-home (or "lockdown") order impacted service calls to San Francisco's Fire Department. To achieve this, I implemented two hierarchical visualization in D3 using data from
+          <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3/data">SF Fire Calls for Service</a> dataset. The data collection and filtering process I used is described below.
         </p>
 
-        <p>This would be an excellent place to describe what this page is for, what to find in different sections, describe any motivation or theme behind your visualizations, and so on.</p>
-
-        <p>You should not use this template unless you intend to customize it. Make it your own. Keep in mind this simple template is over 300 lines! You can see other examples of websites using Bulma at their showcase: <a href="https://bulma.io/expo/">bulma.io/expo/</a>.</p>
-
         <h2 id="data">Data</h2>
-
-        <p>Include some detailed information about the dataset here. You should <a href="#">add a link</a> to the original dataset. You might also want to quote the license:</p>
-
+        <p>My visualizations use data from DataSF's Fire Department Calls for Service dataset: <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3/data">SF Fire Calls for Service</a>.
+          The unfiltered dataset is updated daily, contains 5.2+ million rows (as of April 22nd), and 34 columns. Each row contains information about a Fire Call-For-Service call response.
+          The dataset was filtered to only include calls that occured between March 10th and March 25th in 2020 in the city of San Francisco.
+          This was done through DataSF's <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3/data">SF Fire Calls for Service</a> data filtering tool. I include the license for this dataset below.
+        </p>
         <blockquote>
           <p>
             "This data is made available under the Public Domain Dedication and License v1.0 whose full text can be found at: <a href="http://www.opendatacommons.org/licenses/pddl/1.0/">www.opendatacommons.org/licenses/pddl/1.0/</a>"
           </p>
-          <cite>Put a citation here, possibly link to the dataset license information directly.</cite>
+          <cite>OpenData. 2020. Data was retrieved from
+            <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3/data">SF Fire Calls for Service</a> on April 22nd, 2020.</cite>
         </blockquote>
-
-        <p>In addition to including a link to the source and license, you should describe the data. You might want a list of some sort to enumerate the different types of columns:</p>
-
-        <ol>
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
-
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
-
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
-
-          <li><strong>Column Name:</strong> Give a description of the column, including its type and possible range of values.</li>
-        </ol>
-
-        <p>This will of course differ depending on the assignment and data.</p>
-
-        <h3 id="wrangling">Wrangling</h3>
-
-        <p>Perhaps you had to do some data wrangling to the original dataset to prepare it for visualization. This would be a great place to discuss some of that wrangling.
-
-        <pre>
-You can even put code into these pre blocks.
-  It will preserve whitespace.
-    That is helpful for formatted code.
-        </pre>
-
-        <p>You can alternatively embed a Gist if you want. There is an "embed" button on <a href="https://gist.github.com/octocat/6cad326836d38bd3a7ae">the Gist page</a> and results in something like this:</p>
-
-        <script src="https://gist.github.com/octocat/6cad326836d38bd3a7ae.js"></script>
-
-        <h2 id="visualizations">Visualizations</h2>
-
-        <p>Ideally not everything would be on a single page like this example. Instead, you might want to put each section in its own webpage. You would need to carefully replicate the page template (with the header, navbar, and footer) and make the necessary updates. For example, you want the "About" navbar item to be considered active on an "About" web page.</p>
-
-        <p>For now this is just a demo. The buttons below do not go anywhere, but can be easily changed to link to different visualization pages.</p>
-
-        <p class="buttons">
-          <a class="button is-large is-success" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-line"></i>
-            </span>
-            <span>Line Chart</span>
-          </a>
-
-          <a class="button is-large is-primary" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-area"></i>
-            </span>
-            <span>Area Chart</span>
-          </a>
-
-          <a class="button is-large is-info" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-bar"></i>
-            </span>
-            <span>Bar Chart</span>
-          </a>
-
-          <a class="button is-large is-link" href="#">
-            <span class="icon is-medium">
-              <i class="fas fa-chart-pie"></i>
-            </span>
-            <span>Pie Chart</span>
-          </a>
-        </p>
-
-        <!-- https://github.com/vega/vega-embed#basic-example -->
-        <p>It is possible to embed some visualizations directly here too. Here is <a href="https://github.com/vega/vega-embed#basic-example">an example</a> using Vega-Lite:</p>
-
-        <script src="https://cdn.jsdelivr.net/npm/vega@5.9.0"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.2.1"></script>
-
-        <div id="vis"></div>
-
-        <script type="text/javascript">
-        var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
-        vegaEmbed('#vis', spec).then(function(result) {
-          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-        }).catch(console.error);
-        </script>
-
-        <h4>Instructions</h4>
-
-        <p>You will likely need to include instructions on how to interpet and use the visualization. In the case above, if you click the three dots <i class="fas fa-ellipsis-h has-text-grey-light	"></i> above it will open a menu where you can either save the visualization to a SVG or PNG, or alternatively open it up in the online Vega Editor.</p>
-
-        <h4>Discussion</h4>
-
-        <p>You may also need other sections, like a discussion section, per-visualization section on data wrangling, and others. Because of the extra content and code visualizations take, it might be worthwhile to break up your pages into one home page and then one page per visualization.</p>
-
-        <span class="heading">Acknowledgements</span>
-
+        <p>In addition to the data processing described above, I use Python to further process the data. On March 16th, San Francisco's Mayor London Breed issued a Public Health Order requiring that residence remain in place (commonly refered to as a
+          "stay-at-home" or "lockdown" order), with the only exception being for essential workers.
+          The stay-at-home order became effective at midnight on Tuesday, March 17th (i.e. Wednesday). I created two labels, "Pre-Lockdown" and "Lockdown" and assigned one of these labels to each record. Pre-Lockdown records are service calls that
+          occured between March 10th and March 17th in 2020. Lockdown records are service calls that occured
+          between March 18th and March 25th in 2020. Both label periods contain eight days worth of call response data.
         <p>
-          <a href="#">Link to insiration</a><br/>
-          <a href="#">Link to StackOverflow snippet</a>
+        </p>I reduced the dataset by selectig only the columns I visualized in the hierarchical charts. Specifically, I included the following columns:
+        <ul>
+          <li>City (text): the city where the call response occured. All values are equal to "San Francisco" (due to the filtering described above)</li>
+          <li>Lockdown (boolean): whether the call response occured during the lockdown or not (occured during lockdown = true)</li>
+          <li>Call Type Group (text): the type of call type group assigned to the call response. There are four call type groups: Fire, Alarm, Potential Life Threatening and Non Life Threatening.</li>
+          <li>Call Type (text): the type of call the call response falls into. There are 32 possible call types (a detailed list can be found in the dataset's data dictionary: <a
+              href="https://data.sfgov.org/api/views/nuek-vuh3/files/ddb7f3a9-0160-4f07-bb1e-2af744909294?download=true&filename=FIR-0002_DataDictionary_fire-calls-for-service.xlsx">Fire Department Calls for Service Data Dictionary</a></li>
+          <li>Neighborhooods- Analysis Boundaries' (text): the neighborhoood where the call response occured.</li>
+        </ul>
+        Finally, I removed all rows with null values and saved the data to a csv file (available <a href="assets/data/filtered_fire_calls.csv">here</a>). I wrote a notebook in case viewers want to follow along with the step I used to process the
+        data. It is available <a href="data_wrangling.ipynb">here</a>.
         </p>
 
-        <p class="is-6">
-          <em>Thanks to Person Name for their suggestion to do something with the visualization.</em>
+        <p>Click or hover on the visualiz</p>
+        <!-- Begin Acknowledgements Section -->
+        <span class="heading">Acknowledgements</span>
+        <p>
+          <a href="https://observablehq.com/@d3/zoom-with-tooltip">D3 Zoom & Pan</a></br>
+          <a href="https://github.com/d3">D3</a><br />
+          <a href="https://observablehq.com/@sjengle/java-11-api-hierarchy-visualization">Java 11 API Hierarchy Visualization</a><br />
         </p>
+        <!-- Begin Acknowledgements Section -->
 
+        <!-- Begin Grade Section -->
         <h2 id="grade">Grade</h2>
 
-        <!-- TODO: Remove custom style if no longer needed -->
         <style>
           table.grades tbody tr td:nth-child(1),
           table.grades tbody tr td:nth-child(2) {
@@ -243,7 +161,6 @@ You can even put code into these pre blocks.
           }
         </style>
 
-        <!-- TODO: Change or remove table -->
         <!-- https://bulma.io/documentation/elements/table/ -->
         <table class="table is-hoverable is-bordered grades">
           <thead>
@@ -256,30 +173,11 @@ You can even put code into these pre blocks.
 
           <tbody>
             <tr>
-              <td>D</td>
-              <td><i class="has-text-success fas fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied. Exactly how this section should look will depend on the assignment in question. There is no requirement for formatting in this way. This is just an example of what a table element might look like for this informaiton.</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td><i class="has-text-success fas fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied.</td>
-            </tr>
-
-            <tr>
-              <td>B</td>
-              <td><i class="has-text-warning far fa-check-circle"></i></td>
-              <td>Discussion of how this grade level was satisfied.</td>
-            </tr>
-
-            <tr>
               <td>A</td>
-              <td><i class="has-text-danger fas fa-times-circle"></i></td>
-              <td>Discussion of how this grade level was not satisfied.</td>
+              <td><i class="has-text-success fas fa-check-circle"></i></td>
+              <td>Implemented all B level requirements plus zoom & pan interactivity with tooltip and details.</td>
             </tr>
           </tbody>
-
         </table>
 
         <h2 id="about">About</h2>
@@ -289,42 +187,56 @@ You can even put code into these pre blocks.
         <article class="media">
           <!-- TODO: Replace with profile photo -->
           <figure class="media-left">
-            <p class="image is-128x128"><img class="is-rounded" src="profile.png"></p>
+            <p class="image is-256x256"><img class="is-rounded" src="assets/images/kai_drawing.png"></p>
           </figure>
-
           <div class="media-content">
-            <div class="content">
-              <!-- TODO: Replace with contact information -->
+            <div>
               <p>
-                <strong>Full Name</strong><br/>
-                CS Major, <a href="https://www.usfca.edu/">University of San Francisco</a><br/>
-                <em>Expected Graduation: 20??</em><br/>
-                <i class="fas fa-envelope"></i> <a href="mailto:username@dons.usfca.edu">username@dons.usfca.edu</a>
-              </p>
-
-              <!-- TODO: Replace with brief biography -->
+              <ul>
+                <li><b>Kai Middlebrook</b></li>
+                <li><b>Affiliation: </b><a href="https://www.usfca.edu/">University of San Francisco (USF)</a></li>
+                <li><b>Major: </b> Data Science (May 2020) </li>
+                <li><b>Email: </b><a href="mailto:krmiddlebrook@usfca.edu">krmiddlebrook@usfca.edu</a></li>
+                <li><b>Interests: </b>Deep Learning, Music and Machine Learning, Neuroscience, Psychology, Sociology, History, Music Production</li>
+              </ul>
               <p>
-                Here is a brief bio about yourself. A good rule of thumb is to include at least one technical tidbit (favorite area or course within computer science), and one fun tidbit (such as loving dogs).
+                I am a data scientist by trade. My research interests lie in combining data science with music.
+                I have technical experience in natural language processing (NLP), computer vision, digital audio signal processing,
+                and data engineering. Apparently, it is unhealthy to sit in front of a computer all the time, so I occasionally go backpacking and travel.
               </p>
-
-              <!-- TODO: Replace or remove tags -->
-              <!-- https://bulma.io/documentation/elements/tag/ -->
               <div class="heading">Skills</div>
-
               <div class="tags">
                 <span class="tag">Python</span>
-                <span class="tag">C</span>
-                <span class="tag">Java</span>
+                <span class="tag">ML</span>
+                <span class="tag">Data Engineering</span>
+                <span class="tag">Data Mining</span>
+                <span class="tag">SQL</span>
+                <span class="tag">R</span>
                 <span class="tag">JavaScript</span>
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">SVG</span>
               </div>
+              <div class='columns'>
+                <div class="column is-one-fifth">
+                  <a href="https://github.com/krmiddlebrook" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+                    <i class="fab fa-github-alt"></i>&nbsp;<strong> Github</strong>
+                  </a>
+                </div>
+                <div class="column is-one-fifth">
+                  <a href="https://twitter.com/kai_middlebrook" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+                    <i class="fab fa-twitter"></i>&nbsp;<strong>Twitter</strong>
+                  </a>
+                </div>
+                <div class="column is-one-fifth">
+                  <a href="https://www.linkedin.com/in/kaimiddlebrook/" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+                    <i class="fab fa-linkedin"></i>&nbsp;<strong>LinkedIn</strong>
+                  </a>
+                </div>
+              </div>
+              </p>
             </div>
           </div>
+
         </article>
         <!-- End profile box -->
-
       </div>
       <!-- End page content -->
     </div>
@@ -343,7 +255,7 @@ You can even put code into these pre blocks.
 
       <p>
         <!-- TODO: Change to link to your Github repository -->
-        <a href="https://github.com/usf-cs360-spring2020/template-bulma" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+        <a href="https://github.com/usf-cs360-spring2020/homework4-krmiddlebrook" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
           <i class="fab fa-github-alt"></i>&nbsp;<strong>Github</strong>
         </a>
 
@@ -362,22 +274,30 @@ You can even put code into these pre blocks.
   <!-- Mobile menu responsiveness -->
   <!-- https://bulma.io/documentation/components/navbar/ -->
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    document.addEventListener('DOMContentLoaded', () => {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-    if ($navbarBurgers.length > 0) {
-      $navbarBurgers.forEach( el => {
-        el.addEventListener('click', () => {
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
+      if ($navbarBurgers.length > 0) {
+        $navbarBurgers.forEach(el => {
+          el.addEventListener('click', () => {
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
         });
-      });
-    }
-  });
+      }
+    });
   </script>
   <!-- End mobile menu responsiveness -->
-  </body>
+
+  <!-- custom charting scripts -->
+  <script src="tools.js"></script>
+  <script src="parallel_coords.js"></script>
+  <script type="text/javascript">
+    drawParallelCoord('assets/data/mrc2_parallel.csv');
+  </script>
+
+</body>
 
 </html>
