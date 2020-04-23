@@ -2,7 +2,7 @@
 
 
 <!-- <img src='./kai.jpg' height=120px width=100px> -->
-![Profile Image](/assets/kai.jpg)
+![Profile Image](/assets/images/kai.jpg)
 
 **Name:** Kai Middlebrook
 **Email:** <krmiddlebrook@dons.usfca.edu>

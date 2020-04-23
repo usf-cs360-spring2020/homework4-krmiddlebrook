@@ -173,7 +173,6 @@ function node_link(data) {
       }
     }
 
-
     // show tooltip text on mouseover (hover)
     selection.on('mouseover.tooltip', function(d) {
       showTooltip(g, d3.select(this));
